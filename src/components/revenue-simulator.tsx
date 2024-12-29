@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Card } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
@@ -9,26 +9,31 @@ const RevenueSimulator = () => {
   const [monthlyRevenue, setMonthlyRevenue] = useState(0);
   const [yearlyRevenue, setYearlyRevenue] = useState(0);
 
-  // Coefficients de revenus basés sur l'effort
-  const revenueMultipliers = {
-    basic: { min: 100, max: 300 },
-    seoBasic: { min: 300, max: 800 },
-    seoAdvanced: { min: 800, max: 2000 }
-  };
+  const calculateRevenue = useCallback(() => {
+    const baseRevenue = 100; // Revenu de base par site
+    let multiplier = 1;
 
-  // Calculer les revenus potentiels
-  const calculateRevenue = () => {
-    const multiplier = revenueMultipliers[effortLevel];
-    const averageRevenue = (multiplier.min + multiplier.max) / 2;
-    const monthlyPotential = numberOfSites * averageRevenue;
-    
+    switch (effortLevel) {
+      case 'low':
+        multiplier = 0.5;
+        break;
+      case 'medium':
+        multiplier = 1;
+        break;
+      case 'high':
+        multiplier = 2;
+        break;
+    }
+
+    const monthlyPotential = baseRevenue * numberOfSites * multiplier;
     setMonthlyRevenue(monthlyPotential);
     setYearlyRevenue(monthlyPotential * 12);
-  };
+  }, [numberOfSites, effortLevel]);
 
+  // Calculer les revenus à chaque changement de paramètres
   useEffect(() => {
     calculateRevenue();
-  }, [numberOfSites, effortLevel]);
+  }, [calculateRevenue]);
 
   return (
     <section className="px-4 py-20 bg-gradient-to-b from-gray-50 to-white">
@@ -154,7 +159,7 @@ const RevenueSimulator = () => {
                         <div>
                           <span className="font-medium">Effort Basique :</span> Publication régulière, 
                           contenu basique, promotion simple
-                          ({revenueMultipliers.basic.min}€ - {revenueMultipliers.basic.max}€ /site/mois)
+                          ({100}€ - {100}€ /site/mois)
                         </div>
                       </div>
                     </AlertDescription>
@@ -166,7 +171,7 @@ const RevenueSimulator = () => {
                         <div>
                           <span className="font-medium">SEO de Base :</span> Optimisation SEO de base, 
                           backlinks simples, contenu optimisé
-                          ({revenueMultipliers.seoBasic.min}€ - {revenueMultipliers.seoBasic.max}€ /site/mois)
+                          ({100}€ - {100}€ /site/mois)
                         </div>
                       </div>
                     </AlertDescription>
@@ -178,7 +183,7 @@ const RevenueSimulator = () => {
                         <div>
                           <span className="font-medium">SEO Avancé :</span> Stratégie SEO complète, 
                           backlinks premium, contenu expert
-                          ({revenueMultipliers.seoAdvanced.min}€ - {revenueMultipliers.seoAdvanced.max}€ /site/mois)
+                          ({100}€ - {100}€ /site/mois)
                         </div>
                       </div>
                     </AlertDescription>
