@@ -1,9 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
+
+interface FormData {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 export default function RegisterForm() {
   const router = useRouter()
@@ -12,7 +18,7 @@ export default function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
 
@@ -22,7 +28,14 @@ export default function RegisterForm() {
       return
     }
 
-    if (password !== confirmPassword) {
+    const formData = new FormData(e.currentTarget)
+    const data: FormData = {
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+      confirmPassword: formData.get('confirmPassword') as string
+    }
+
+    if (data.password !== data.confirmPassword) {
       toast.error('Les mots de passe ne correspondent pas')
       setLoading(false)
       return
@@ -30,8 +43,8 @@ export default function RegisterForm() {
 
     try {
       const { error } = await supabase.auth.signUp({
-        email,
-        password,
+        email: data.email,
+        password: data.password,
         options: {
           emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
@@ -49,7 +62,7 @@ export default function RegisterForm() {
   }
 
   return (
-    <form onSubmit={handleRegister} className="space-y-4 w-full max-w-md">
+    <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md">
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
           Email

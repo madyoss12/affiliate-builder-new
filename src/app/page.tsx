@@ -1,8 +1,7 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { Rocket, Check, Star, Zap, BarChart, Play, ArrowRight, Code, Palette, Bot } from 'lucide-react'
 import { motion } from 'framer-motion'
@@ -51,7 +50,7 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Créez des Sites d'Affiliation
+            Créez des sites d&apos;affiliation
             <span className="block text-indigo-600">en Quelques Clics</span>
           </motion.h1>
           <motion.p 
@@ -60,8 +59,8 @@ export default function LandingPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            Générez automatiquement des sites d'affiliation optimisés et rentables sans coder.
-            Multiplier vos revenus n'a jamais été aussi simple.
+            Générez automatiquement des sites d&apos;affiliation optimisés et rentables sans coder.
+            Multiplier vos revenus n&apos;a jamais été aussi simple.
           </motion.p>
           <motion.div 
             className="mb-8 space-x-4"
@@ -84,7 +83,7 @@ export default function LandingPage() {
                 <DialogHeader>
                   <DialogTitle>Découvrez Affiliate Builder en action</DialogTitle>
                   <DialogDescription>
-                    Voyez comment créer un site d'affiliation en moins de 5 minutes.
+                    Voyez comment créer un site d&apos;affiliation en moins de 5 minutes.
                   </DialogDescription>
                 </DialogHeader>
                 <div className="aspect-video bg-gray-100 rounded-lg"></div>
@@ -121,7 +120,7 @@ export default function LandingPage() {
               {
                 icon: <Bot className="w-8 h-8 text-indigo-600" />,
                 title: "IA Intégrée",
-                description: "Génération de contenu optimisé par l'IA"
+                description: "Génération de contenu optimisé par l&apos;IA"
               },
               {
                 icon: <Zap className="w-8 h-8 text-indigo-600" />,
@@ -171,7 +170,7 @@ export default function LandingPage() {
             {
               icon: <Zap className="w-12 h-12 mb-4 text-indigo-600" />,
               title: "Templates Professionnels",
-              description: "Des designs modernes et convertissants, prêts à l'emploi et personnalisables."
+              description: "Des designs modernes et convertissants, prêts à l&apos;emploi et personnalisables."
             },
             {
               icon: <BarChart className="w-12 h-12 mb-4 text-indigo-600" />,
@@ -292,12 +291,12 @@ export default function LandingPage() {
             {
               name: "Thomas D.",
               role: "Affiliate Marketer",
-              content: "J'ai multiplié mes revenus d'affiliation par 3 en seulement 2 mois grâce à cet outil. La génération automatique de contenu est vraiment impressionnante."
+              content: "J&apos;ai multiplié mes revenus d&apos;affiliation par 3 en seulement 2 mois grâce à cet outil. La génération automatique de contenu est vraiment impressionnante."
             },
             {
               name: "Sophie M.",
               role: "Blogueuse",
-              content: "La simplicité d'utilisation est incroyable. Je peux créer des sites d'affiliation professionnels en quelques minutes seulement."
+              content: "La simplicité d&apos;utilisation est incroyable. Je peux créer des sites d&apos;affiliation professionnels en quelques minutes seulement."
             },
             {
               name: "Pierre L.",
@@ -349,7 +348,7 @@ export default function LandingPage() {
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
             >
-              Prêt à augmenter vos revenus d'affiliation ?
+              Prêt à augmenter vos revenus d&apos;affiliation ?
             </motion.h2>
             <motion.p 
               className="mb-8 text-xl text-indigo-100"
@@ -358,7 +357,7 @@ export default function LandingPage() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              Commencez gratuitement dès aujourd'hui. Pas de carte de crédit requise.
+              Commencez gratuitement dès aujourd&apos;hui. Pas de carte de crédit requise.
             </motion.p>
             <motion.form 
               onSubmit={handleSubmit} 

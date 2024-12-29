@@ -1,9 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
+
+interface FormData {
+  email: string;
+  password: string;
+}
 
 export default function LoginForm() {
   const router = useRouter()
@@ -11,7 +16,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
@@ -22,10 +27,16 @@ export default function LoginForm() {
       return
     }
 
+    const formData = new FormData(e.currentTarget)
+    const data: FormData = {
+      email: formData.get('email') as string,
+      password: formData.get('password') as string
+    }
+
     try {
       const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+        email: data.email,
+        password: data.password,
       })
 
       if (error) throw error
@@ -40,7 +51,7 @@ export default function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleLogin} className="space-y-4 w-full max-w-md">
+    <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md">
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
           Email
