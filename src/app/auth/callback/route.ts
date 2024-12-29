@@ -19,18 +19,10 @@ export async function GET(request: Request) {
             return cookie?.value
           },
           set(name: string, value: string, options: CookieOptions) {
-            try {
-              cookieStore.set(name, value, options)
-            } catch (error) {
-              // Handle error if needed
-            }
+            cookieStore.set(name, value, options)
           },
           remove(name: string, options: CookieOptions) {
-            try {
-              cookieStore.delete(name, options)
-            } catch (error) {
-              // Handle error if needed
-            }
+            cookieStore.delete(name, options)
           },
         },
       }
