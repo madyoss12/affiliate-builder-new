@@ -3,9 +3,8 @@
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Card, CardContent } from '@/components/ui/card'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Rocket, Check, Star, Users, Zap, BarChart, Play, ArrowRight, Code, Palette, Bot } from 'lucide-react'
+import { Card } from '@/components/ui/card'
+import { Rocket, Check, Star, Zap, BarChart, Play, ArrowRight, Code, Palette, Bot } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {

@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Slider } from '@/components/ui/slider';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { BarChart2, TrendingUp, Settings } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react'
+import { Card } from "@/components/ui/card"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Slider } from "@/components/ui/slider"
 
 const RevenueSimulator = () => {
   const [numberOfSites, setNumberOfSites] = useState(1);
@@ -36,11 +33,8 @@ const RevenueSimulator = () => {
   return (
     <section className="px-4 py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="mx-auto max-w-4xl">
-        <motion.div 
+        <div 
           className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
         >
           <h2 className="text-4xl font-bold mb-4">
             Simulez vos Revenus d'Affiliation
@@ -48,23 +42,13 @@ const RevenueSimulator = () => {
           <p className="text-xl text-gray-600">
             Découvrez votre potentiel de gains mensuels en fonction de votre investissement
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
           <Card className="shadow-xl border-0">
             <CardContent className="p-8">
               {/* Nombre de sites */}
-              <motion.div 
+              <div 
                 className="mb-8"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
               >
                 <div className="flex justify-between mb-2">
                   <label className="text-lg font-medium">Nombre de Sites</label>
@@ -82,15 +66,11 @@ const RevenueSimulator = () => {
                   <span>1 site</span>
                   <span>10 sites</span>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Niveau d'effort */}
-              <motion.div 
+              <div 
                 className="mb-8"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
               >
                 <label className="text-lg font-medium mb-2 block">
                   Niveau d'Effort
@@ -132,15 +112,11 @@ const RevenueSimulator = () => {
                     </SelectItem>
                   </SelectContent>
                 </Select>
-              </motion.div>
+              </div>
 
               {/* Résultats */}
-              <motion.div 
+              <div 
                 className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-6 relative z-[1]"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
               >
                 <h3 className="text-xl font-bold mb-4 text-center">
                   Revenus Potentiels
@@ -148,36 +124,26 @@ const RevenueSimulator = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center">
                     <div className="text-sm text-gray-600 mb-1">Revenu Mensuel</div>
-                    <motion.div 
+                    <div 
                       className="text-3xl font-bold text-indigo-600"
-                      key={monthlyRevenue}
-                      initial={{ scale: 0.8 }}
-                      animate={{ scale: 1 }}
                     >
                       {monthlyRevenue.toLocaleString()}€
-                    </motion.div>
+                    </div>
                   </div>
                   <div className="text-center">
                     <div className="text-sm text-gray-600 mb-1">Revenu Annuel</div>
-                    <motion.div 
+                    <div 
                       className="text-3xl font-bold text-indigo-600"
-                      key={yearlyRevenue}
-                      initial={{ scale: 0.8 }}
-                      animate={{ scale: 1 }}
                     >
                       {yearlyRevenue.toLocaleString()}€
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Détails des efforts */}
-              <motion.div 
+              <div 
                 className="mt-6"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6 }}
               >
                 <h4 className="font-medium mb-2">Détails par niveau d'effort :</h4>
                 <div className="space-y-2">
@@ -218,23 +184,18 @@ const RevenueSimulator = () => {
                     </AlertDescription>
                   </Alert>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Disclaimer */}
-              <motion.div 
+              <div 
                 className="mt-6 text-sm text-gray-500 text-center"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.7 }}
               >
                 * Ces estimations sont basées sur des moyennes du marché. 
                 Les résultats réels peuvent varier en fonction de nombreux facteurs 
                 (niche, qualité du contenu, concurrence, etc.)
-              </motion.div>
+              </div>
             </CardContent>
           </Card>
-        </motion.div>
       </div>
     </section>
   );
