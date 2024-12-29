@@ -28,7 +28,7 @@ export default function LoginForm() {
     setError(null)
 
     if (process.env.NODE_ENV === 'development') {
-      toast.info('Mode développement : Supabase n\'est pas encore configuré')
+      toast.success('Mode développement : Supabase n\'est pas encore configuré')
       setLoading(false)
       return
     }
