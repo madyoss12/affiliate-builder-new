@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   description: 'Créez et gérez vos sites d\'affiliation facilement',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   // Récupérer le pathname pour déterminer quel header afficher
-  const headersList = headers()
+  const headersList = await headers()
   const pathname = headersList.get('x-invoke-path') || ''
   
   // Les pages qui devraient avoir le header du dashboard
