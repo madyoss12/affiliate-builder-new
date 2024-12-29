@@ -11,22 +11,23 @@ interface FormData {
   confirmPassword: string;
 }
 
+type AuthError = {
+  message: string;
+  status?: number;
+}
+
 export default function RegisterForm() {
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<AuthError | null>(null)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-
-    if (process.env.NODE_ENV === 'development') {
-      toast.info('Mode développement : Supabase n\'est pas encore configuré')
-      setLoading(false)
-      return
-    }
+    setError(null)
 
     const formData = new FormData(e.currentTarget)
     const data: FormData = {
@@ -36,13 +37,19 @@ export default function RegisterForm() {
     }
 
     if (data.password !== data.confirmPassword) {
-      toast.error('Les mots de passe ne correspondent pas')
+      setError({ message: 'Les mots de passe ne correspondent pas' })
+      setLoading(false)
+      return
+    }
+
+    if (process.env.NODE_ENV === 'development') {
+      toast.info('Mode développement : Supabase n\'est pas encore configuré')
       setLoading(false)
       return
     }
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { error: authError } = await supabase.auth.signUp({
         email: data.email,
         password: data.password,
         options: {
@@ -50,12 +57,13 @@ export default function RegisterForm() {
         },
       })
 
-      if (error) throw error
+      if (authError) throw authError
 
       toast.success('Inscription réussie ! Vérifiez votre email pour confirmer votre compte.')
       router.push('/login')
-    } catch (error: any) {
-      toast.error(error.message || 'Erreur lors de l\'inscription')
+    } catch (err) {
+      setError(err as AuthError)
+      toast.error(error?.message || 'Erreur lors de l\'inscription')
     } finally {
       setLoading(false)
     }

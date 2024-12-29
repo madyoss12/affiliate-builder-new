@@ -10,11 +10,17 @@ interface FormData {
   password: string;
 }
 
+type AuthError = {
+  message: string;
+  status?: number;
+}
+
 export default function LoginForm() {
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<AuthError | null>(null)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -34,17 +40,18 @@ export default function LoginForm() {
     }
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error: authError } = await supabase.auth.signInWithPassword({
         email: data.email,
         password: data.password,
       })
 
-      if (error) throw error
+      if (authError) throw authError
 
       toast.success('Connexion réussie')
       router.push('/dashboard')
-    } catch (error: any) {
-      toast.error(error.message || 'Erreur lors de la connexion')
+    } catch (err) {
+      setError(err as AuthError)
+      toast.error(error?.message || 'Erreur lors de la connexion')
     } finally {
       setLoading(false)
     }

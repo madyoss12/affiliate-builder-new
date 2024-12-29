@@ -1,7 +1,9 @@
 import { useEffect, useState, useCallback } from 'react'
-import { Card } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Settings, TrendingUp, BarChart2 } from 'lucide-react'
 
 const RevenueSimulator = () => {
   const [numberOfSites, setNumberOfSites] = useState(1);
@@ -42,7 +44,7 @@ const RevenueSimulator = () => {
           className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold mb-4">
-            Simulez vos Revenus d'Affiliation
+            Simulez vos Revenus d&apos;Affiliation
           </h2>
           <p className="text-xl text-gray-600">
             Découvrez votre potentiel de gains mensuels en fonction de votre investissement
@@ -73,19 +75,19 @@ const RevenueSimulator = () => {
                 </div>
               </div>
 
-              {/* Niveau d'effort */}
+              {/* Niveau d&apos;effort */}
               <div 
                 className="mb-8"
               >
                 <label className="text-lg font-medium mb-2 block">
-                  Niveau d'Effort
+                  Niveau d&apos;Effort
                 </label>
                 <Select 
                   value={effortLevel}
                   onValueChange={setEffortLevel}
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Sélectionnez le niveau d'effort" />
+                    <SelectValue placeholder="Sélectionnez le niveau d&apos;effort" />
                   </SelectTrigger>
                   <SelectContent position="popper" side="bottom" sideOffset={5} className="w-[--radix-select-trigger-width] z-[100] bg-white shadow-lg">
                     <SelectItem value="basic">
@@ -150,41 +152,37 @@ const RevenueSimulator = () => {
               <div 
                 className="mt-6"
               >
-                <h4 className="font-medium mb-2">Détails par niveau d'effort :</h4>
+                <h4 className="font-medium mb-2">Détails par niveau d&apos;effort :</h4>
                 <div className="space-y-2">
                   <Alert>
+                    <Settings className="h-4 w-4" />
                     <AlertDescription>
-                      <div className="flex items-center">
-                        <Settings className="w-4 h-4 mr-2" />
-                        <div>
-                          <span className="font-medium">Effort Basique :</span> Publication régulière, 
-                          contenu basique, promotion simple
-                          ({100}€ - {100}€ /site/mois)
-                        </div>
+                      <div>
+                        <span className="font-medium">Effort Basique :</span> Publication régulière, 
+                        contenu basique, promotion simple
+                        ({100}€ - {100}€ /site/mois)
                       </div>
                     </AlertDescription>
                   </Alert>
+                  
                   <Alert>
+                    <TrendingUp className="h-4 w-4" />
                     <AlertDescription>
-                      <div className="flex items-center">
-                        <TrendingUp className="w-4 h-4 mr-2" />
-                        <div>
-                          <span className="font-medium">SEO de Base :</span> Optimisation SEO de base, 
-                          backlinks simples, contenu optimisé
-                          ({100}€ - {100}€ /site/mois)
-                        </div>
+                      <div>
+                        <span className="font-medium">SEO de Base :</span> Optimisation SEO de base, 
+                        backlinks simples, contenu optimisé
+                        ({100}€ - {100}€ /site/mois)
                       </div>
                     </AlertDescription>
                   </Alert>
+                  
                   <Alert>
+                    <BarChart2 className="h-4 w-4" />
                     <AlertDescription>
-                      <div className="flex items-center">
-                        <BarChart2 className="w-4 h-4 mr-2" />
-                        <div>
-                          <span className="font-medium">SEO Avancé :</span> Stratégie SEO complète, 
-                          backlinks premium, contenu expert
-                          ({100}€ - {100}€ /site/mois)
-                        </div>
+                      <div>
+                        <span className="font-medium">SEO Avancé :</span> Stratégie SEO complète, 
+                        backlinks premium, contenu expert
+                        ({100}€ - {100}€ /site/mois)
                       </div>
                     </AlertDescription>
                   </Alert>
