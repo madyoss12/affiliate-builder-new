@@ -2,6 +2,7 @@ import { createServerClient } from '@/lib/supabase/server'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { CookieOptions } from '@supabase/ssr'
+import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url)
@@ -19,10 +20,21 @@ export async function GET(request: Request) {
             return cookie?.value
           },
           set(name: string, value: string, options: CookieOptions) {
-            cookieStore.set(name, value, options)
+            cookieStore.set({
+              name,
+              value,
+              ...options,
+              // Convertir les options de Supabase en options Next.js
+              sameSite: options.sameSite as ResponseCookie['sameSite'],
+            })
           },
           remove(name: string, options: CookieOptions) {
-            cookieStore.delete(name, options)
+            cookieStore.delete({
+              name,
+              ...options,
+              // Convertir les options de Supabase en options Next.js
+              sameSite: options.sameSite as ResponseCookie['sameSite'],
+            })
           },
         },
       }
